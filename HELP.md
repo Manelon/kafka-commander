@@ -1,5 +1,15 @@
 # Getting Started
 
+### How to
+* How to start Docker Compose: docker-compose up (with -d will run in the background)
+* How to stop Docker Compose: docker-compose down (with --volumes will delete the volumes also)
+* How to check logs: docker-compose logs -f (you can add the name of the service for filter the logs)
+* How to use kafkacat in this demo:
+    * How to open a remote shell: docker-compose exec kafkacat /bin/sh
+    * How to list topics: kafkacat -L -b broker:29092
+    * How to consume topics: kafkacat -b kafka:29092 -r http://schema-registry:8081 -s avro -t topic_name -C -o -10 -q 
+* How to open the MYSQL Console: docker exec -it mysql bash -c 'mysql -u root -p$MYSQL_ROOT_PASSWORD demo'
+
 ### Reference Documentation
 For further reference, please consider the following sections:
 
@@ -19,4 +29,4 @@ The following guides illustrate how to use some features concretely:
 * [Serving Web Content with Spring MVC](https://spring.io/guides/gs/serving-web-content/)
 * [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
 * [Handling Form Submission](https://spring.io/guides/gs/handling-form-submission/)
-
+* [How to create data for demos](https://www.mockaroo.com/)
