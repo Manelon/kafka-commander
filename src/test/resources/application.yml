@@ -1,3 +1,3 @@
 kommander:
-    cluster:
-        bootstrapServers: ""
+    clusterProperties:
+        bootstrap.servers: "localhost:9092"

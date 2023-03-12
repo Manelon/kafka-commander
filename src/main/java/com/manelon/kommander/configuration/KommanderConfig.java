@@ -17,17 +17,8 @@ import lombok.Data;
 @ConfigurationProperties(prefix = "kommander")
 @Data
 public class KommanderConfig {
-    private Cluster cluster;
 
-    @Data
-    public static class Cluster {
-        String bootstrapServers;
-        String schemaRegistryUrl;
+    private final Properties clusterProperties = new Properties();
 
-        private final Properties clientProperties = new Properties();
-
-        public Properties getClientProperties() {
-            return clientProperties;
-        }
-    }
 }
+

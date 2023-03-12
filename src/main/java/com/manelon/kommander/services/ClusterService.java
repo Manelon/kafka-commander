@@ -1,35 +1,36 @@
 package com.manelon.kommander.services;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.DependsOn;
-import org.springframework.stereotype.Component;
+import java.util.Collection;
+import java.util.Properties;
+import java.util.concurrent.ExecutionException;
+
 import org.springframework.stereotype.Service;
+import org.apache.kafka.clients.admin.AdminClient;
+import org.apache.kafka.clients.admin.AdminClientConfig;
+import org.apache.kafka.clients.admin.TopicListing;
 
 import com.manelon.kommander.configuration.KommanderConfig;
 
-import lombok.Data;
 
-@Data
 @Service
 
 public class ClusterService {
-    private String bootstrapServers;
-    private String schemaRegistryUrl;
+    
+    private Properties clusterProperties;
+    private AdminClient adminClient;
 
-    @Autowired 
+    public String getBootstrapServers() {
+        return clusterProperties.getProperty(AdminClientConfig.BOOTSTRAP_SERVERS_CONFIG);
+    }
+
     public ClusterService(KommanderConfig config) {
-        this.bootstrapServers = config.getCluster().getBootstrapServers();
-        this.schemaRegistryUrl = config.getCluster().getSchemaRegistryUrl();
+        this.clusterProperties = config.getClusterProperties();
+        this.adminClient = AdminClient.create(clusterProperties);
     }
     
-    public ClusterService(String bootstrapServers, String schemaRegistryUrl) {
-        this.bootstrapServers = bootstrapServers;
-        this.schemaRegistryUrl = schemaRegistryUrl;
-    }
 
-    //Get list of topics of the cluster using kafka admin client
-    public void getTopics() {
-        
-    }            
+    public Collection<TopicListing> getTopics() throws InterruptedException, ExecutionException {
+       return adminClient.listTopics().listings().get();
+    }
 }
 
