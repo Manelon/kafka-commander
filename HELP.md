@@ -30,3 +30,4 @@ The following guides illustrate how to use some features concretely:
 * [Building REST services with Spring](https://spring.io/guides/tutorials/rest/)
 * [Handling Form Submission](https://spring.io/guides/gs/handling-form-submission/)
 * [How to create data for demos](https://www.mockaroo.com/)
+* [How to use embebed kafka cluster with SpringBoot](https://docs.spring.io/spring-kafka/docs/current/reference/html/#same-broker-multiple-tests)

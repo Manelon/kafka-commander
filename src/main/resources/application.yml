@@ -1,0 +1,6 @@
+kommander:
+    clusterProperties:
+        bootstrap.servers: "localhost:9092"
+management.endpoint.health:
+    include: diskSpace
+    show-details: always
